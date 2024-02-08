@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  name     String
+  lastName String
+  email    String   @unique
+  password String
+  CPF      String?  @unique
+  CNPJ     String?  @unique
+  tel      String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  store Store[]
+
+  @@map("user")
+}
+
+model Address {
+  id         String   @id @default(uuid())
+  street     String
+  CEP        String
+  district   String
+  state      String
+  city       String
+  number     String
+  complement String?
+  createAt   DateTime @default(now())
+  updateAt   DateTime @updatedAt
+
+  store   Store  @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId String
+
+  @@map("address")
+}
+
+model Store {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  logoUrl     String?
+  CNPJ        String?
+  tel         String
+  description String
+  type        String
+  createAt    DateTime @default(now())
+  updateAt    DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  products Products[]
+  address  Address[]
+
+  @@map("store")
+}
+
+model Category {
+  id       String   @id @default(uuid())
+  name     String
+  imageUrl String?
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  product Products[]
+
+  @@map("category")
+}
+
+model Products {
+  id          String   @id @default(uuid())
+  number      Int      @default(autoincrement())
+  name        String
+  description String
+  imageUrl    String?
+  type        String?
+  ingredients String?
+  createAt    DateTime @default(now())
+  updateAt    DateTime @updatedAt
+
+  order Orders[]
+
+  store   Store  @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId String
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  @@map("products")
+}
+
+model Orders {
+  id       String   @id @default(cuid())
+  number   Int      @unique @default(autoincrement())
+  state    String
+  finished Boolean  @default(false)
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  product    Products? @relation(fields: [productsId], references: [id], onDelete: Cascade)
+  productsId String?
+
+  address DeliveryAddress[]
+
+  @@map("orders")
+}
+
+model DeliveryAddress {
+  id         String   @id @default(uuid())
+  street     String
+  city       String
+  district   String
+  number     String
+  complement String?
+  createAt   DateTime @default(now())
+  updateAt   DateTime @updatedAt
+
+  order    Orders @relation(fields: [ordersId], references: [id], onDelete: Cascade)
+  ordersId String
+
+  @@map("delivery_address")
+}
