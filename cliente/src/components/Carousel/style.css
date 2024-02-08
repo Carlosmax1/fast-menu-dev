@@ -1,0 +1,15 @@
+.container-carousel {
+  max-width: 1400px;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.inner {
+  display: flex;
+  gap: 1.3rem;
+}
+
+.carousel {
+  cursor: grab;
+  overflow: hidden;
+}
