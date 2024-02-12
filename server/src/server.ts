@@ -3,11 +3,13 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
+import cookieParser from 'cookie-parser';
 
 import { SocketMiddleware } from './middlewares/socket.middlware';
 
 import { authRouter } from './routes/auth.routes';
 import { userRouter } from './routes/user.routes';
+import { mailRouter } from './routes/mail.routes';
 
 const app = express();
 const server = createServer(app);
@@ -27,15 +29,22 @@ app.use(
 		credentials: true,
 	})
 );
+app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/mail', mailRouter);
 
 io.use(SocketMiddleware).on('connect', (socket) => {
 	console.log(`User ${socket.id} connected`);
 	socket.on('disconnect', () => {
 		console.log(`User ${socket.id} off`);
 	});
+});
+
+process.on('SIGINT', () => {
+	console.log('Ctrl-C was pressed');
+	process.exit();
 });
 
 server.listen(3333, () => {

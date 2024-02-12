@@ -2,5 +2,8 @@ POST http://localhost:3333/api/user
 Content-type: application/json
 
 {
-  "name": "sample"
+  "name": "Carlos",
+  "lastName": "Eduardo",
+  "email": "carlosjogos",
+  "CPF": "115708"
 }

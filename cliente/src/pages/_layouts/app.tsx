@@ -1,37 +1,32 @@
-import { isAxiosError } from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { api } from '../../lib/axios';
+import { Loader2 } from 'lucide-react';
 
 export function AppLayout() {
+	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
 
+	async function checkLogin() {
+		await api
+			.get('/api/auth/check')
+			.then((res) => setIsLoading(false))
+			.catch((e) => navigate('/sign-in'));
+	}
+
 	useEffect(() => {
-		const interceptorId = api.interceptors.response.use(
-			(response) => response,
-			(error) => {
-				if (isAxiosError(error)) {
-					console.log(error);
-					const status = error.response?.status;
-					const code = error.response?.data.code;
-
-					if (status === 401 && code === 'UNAUTHORIZED') {
-						navigate('/sign-in', { replace: true });
-					} else {
-						throw error;
-					}
-				}
-			}
-		);
-
-		return () => {
-			api.interceptors.response.eject(interceptorId);
-		};
-	}, [navigate]);
+		checkLogin();
+	}, []);
 
 	return (
-		<div className="flex min-h-screen flex-col antialiased bg-zinc-50">
-			<Outlet />
+		<div className="h-screen bg-zinc-50">
+			{isLoading ? (
+				<div className="h-full flex justify-center items-center">
+					<Loader2 size={50} className="animate-spin" />
+				</div>
+			) : (
+				<Outlet />
+			)}
 		</div>
 	);
 }
