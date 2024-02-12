@@ -34,6 +34,15 @@ app.use(cookieParser());
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/mail', mailRouter);
+app.get('/api/teste', (req, res) => {
+	const notification = {
+		id: crypto.randomUUID(),
+		content: 'Notificação teste',
+		createAt: new Date(Date.now()).toISOString(),
+	};
+	io.emit('notification', notification);
+	return res.status(200).json({});
+});
 
 io.use(SocketMiddleware).on('connect', (socket) => {
 	console.log(`User ${socket.id} connected`);

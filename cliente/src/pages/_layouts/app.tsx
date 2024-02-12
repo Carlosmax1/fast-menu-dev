@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { api } from '../../lib/axios';
+import { Toaster } from '@/components/ui/sonner';
 import { Loader2 } from 'lucide-react';
 
 export function AppLayout() {
@@ -25,7 +26,10 @@ export function AppLayout() {
 					<Loader2 size={50} className="animate-spin" />
 				</div>
 			) : (
-				<Outlet />
+				<>
+					<Outlet />
+					<Toaster expand position="bottom-right" />
+				</>
 			)}
 		</div>
 	);
