@@ -5,18 +5,19 @@ import { Toaster } from '@/components/ui/sonner';
 import { Loader2 } from 'lucide-react';
 
 export function AppLayout() {
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 
 	async function checkLogin() {
 		await api
 			.get('/api/auth/check')
 			.then((res) => setIsLoading(false))
-			.catch((e) => navigate('/sign-in'));
+			.catch((e) => navigate('/'))
+			.finally(() => setIsLoading(false));
 	}
 
 	useEffect(() => {
-		checkLogin();
+		//checkLogin();
 	}, []);
 
 	return (

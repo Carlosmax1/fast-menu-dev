@@ -54,8 +54,8 @@ export function Dashboard() {
 	return (
 		<>
 			<audio ref={notificationAudioRef} src="/sound.mp3" preload="metadata" />
-			<div className="h-full flex overflow-hidden">
-				<div className="shadow-lg w-[15%] h-full grid grid-rows-[max-content_1fr_max-content]">
+			<div className="max-h-full flex overflow-hidden">
+				<div className="bg-transparent w-[15%] h-full grid grid-rows-[max-content_1fr_max-content]">
 					<h1 className="p-4 font-bold">PizzaFast</h1>
 					<menu className="p-4 flex place-items-center">
 						<ul className="flex gap-4 flex-col w-full relative">
@@ -140,7 +140,7 @@ export function Dashboard() {
 						</ul>
 					</div>
 				</div>
-				<main className="mt-10 px-10 overflow-y-auto pb-10 w-full">
+				<main className="mt-10 px-10 overflow-y-auto pb-10 pt-10 w-full bg-white rounded-xl border mr-10 shadow-lg">
 					{currentTab === null && <TabHome />}
 					{currentTab === 'products' && <TabProducts />}
 					{currentTab === 'orders' && <TabOrders />}
