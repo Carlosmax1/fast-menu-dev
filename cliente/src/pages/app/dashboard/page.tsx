@@ -7,7 +7,8 @@ import { toast } from 'sonner';
 import { TabHome } from './tabs/tab-home';
 import { TabProducts } from './tabs/tab-products';
 import { TabOrders } from './tabs/tab-orders';
-import { DashboardMenu} from '../../../components/DashboardMenu'
+import { DashboardMenu } from '../../../components/DashboardMenu';
+import { ProductCatalog } from './catalog/product-catalog';
 //import { TopLoadingBar } from '@/components/TopLoadingBar';
 
 export function Dashboard() {
@@ -76,6 +77,7 @@ export function Dashboard() {
 					{currentTab === null && <TabHome />}
 					{currentTab === 'products' && <TabProducts />}
 					{currentTab === 'orders' && <TabOrders />}
+					{currentTab === 'product' && <ProductCatalog />}
 				</main>
 				<footer></footer>
 			</div>
