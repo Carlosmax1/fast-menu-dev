@@ -5,6 +5,7 @@ import { Home, Utensils, ClipboardPenIcon, AlignJustify, ChevronDown } from 'luc
 export function DashboardMenu() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [notification, setNotification] = useState<any[]>([]);
+	const [meunOpen, setMenuOpen] = useState<boolean>(false);
 
 	const currentTab = searchParams.get('tabs');
 
@@ -31,22 +32,26 @@ export function DashboardMenu() {
 				</ul>
 				<div className="grid">
 					<span className="text-primary-foreground text-zinc-400 text-xs">Vendas</span>
-					<div className="w-full flex justify-between items-center">
-						<span
-							className={`text-sm font-medium text-zinc-800 flex items-center gap-2 p-2 w-full cursor-pointer ${
-								currentTab === 'products' && `after:content-[''] after:absolute after:h-6 after:w-1 after:bg-orange-500 after:left-[-15px] after:rounded-b-md after:rounded-t-md`
-							}`}
-						>
-							{' '}
-							<AlignJustify size={20} className="text-zinc-800" />
-							Cardapio
-						</span>
-						<ChevronDown size={15} className="text-zinc-800" />
+					<div onClick={() => setMenuOpen(old => !old)} className={`${meunOpen && `bg-orange-200 pr-2 rounded-lg`}`}>
+						<div className="w-full flex justify-between items-center">
+							<span
+								className={`text-sm font-medium text-zinc-800 flex items-center gap-2 p-2 w-full cursor-pointer ${
+									currentTab === 'menu' && `after:content-[''] after:absolute after:h-6 after:w-1 after:bg-orange-500 after:left-[-15px] after:rounded-b-md after:rounded-t-md`
+								}`}
+							>
+								{' '}
+								<AlignJustify size={20} className="text-zinc-800" />
+								Cardápio
+							</span>
+							<ChevronDown size={15} className="text-zinc-800" />
+						</div>
+						{meunOpen && 
+						<ul className="ml-5 flex flex-col gap-2">
+							<li className="text-xs font-medium text-zinc-800 p-1">Produtos</li>
+							<li className="text-xs font-medium text-zinc-800 p-1">Categorias</li>
+						</ul> }
+					
 					</div>
-					<ul className="ml-5 flex flex-col gap-2">
-						<li className="text-xs font-medium text-zinc-800">Produtos</li>
-						<li className="text-xs font-medium text-zinc-800">Categorias</li>
-					</ul>
 				</div>
 				<ul className="flex gap-4 flex-col w-full relative">
 					<li
