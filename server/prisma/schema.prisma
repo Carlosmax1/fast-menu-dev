@@ -97,12 +97,15 @@ model Products {
 }
 
 model Orders {
-  id       String   @id @default(cuid())
-  number   Int      @unique @default(autoincrement())
-  state    String
-  finished Boolean  @default(false)
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  id        String   @id @default(cuid())
+  number    Int      @unique @default(autoincrement())
+  state     String
+  username  String
+  userphone String
+  CPF       String?
+  finished  Boolean  @default(false)
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
 
   product    Products? @relation(fields: [productsId], references: [id], onDelete: Cascade)
   productsId String?

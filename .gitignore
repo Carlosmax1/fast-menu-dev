@@ -3,3 +3,5 @@ pizza-fast/node_modules
 pizzashop/node_modules
 server/**/node_modules
 test-socket/node_modules
+
+server/prisma/migrations
