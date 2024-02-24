@@ -42,12 +42,7 @@ export function DashboardMenu() {
 				</ul>
 				<div className="grid mt-3">
 					<span className="text-primary-foreground text-zinc-400 text-xs">Vendas</span>
-					<div
-						onClick={() => {
-							setMenuOpen((old) => !old);
-						}}
-						className={`${meunOpen && `bg-orange-200 rounded-lg`} pr-3 mt-3`}
-					>
+					<div className={`${meunOpen && `bg-orange-200 rounded-lg`} pr-3 mt-3`}>
 						<div className="w-full flex justify-between items-center">
 							<span
 								className={`text-sm font-medium text-zinc-800 flex items-center gap-2 p-2 w-full cursor-pointer ${
@@ -59,11 +54,18 @@ export function DashboardMenu() {
 								<AlignJustify size={20} className="text-zinc-800" />
 								Catalago
 							</span>
-							{meunOpen ? (
-								<ChevronUp size={15} className="text-zinc-800" />
-							) : (
-								<ChevronDown size={15} className="text-zinc-800" />
-							)}
+							<div
+								onClick={() => {
+									setMenuOpen((old) => !old);
+								}}
+								className="w-full h-full cursor-pointer"
+							>
+								{meunOpen ? (
+									<ChevronUp size={15} className="text-zinc-800" />
+								) : (
+									<ChevronDown size={15} className="text-zinc-800" />
+								)}
+							</div>
 						</div>
 						{meunOpen && (
 							<ul className="ml-5 flex flex-col gap-2 dropdown">

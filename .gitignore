@@ -5,3 +5,4 @@ server/**/node_modules
 test-socket/node_modules
 
 server/prisma/migrations
+server/dist

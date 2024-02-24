@@ -7,7 +7,7 @@
     "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
     "start:queue": "tsx watch src/queue.ts",
-    "build": "tsup src",
+    "build": "tsup src && cp package.json .env -r prisma dist/",
     "dev:bun": "bun --watch src/server.ts"
   },
   "keywords": [],
