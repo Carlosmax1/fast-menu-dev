@@ -6,6 +6,7 @@ import { Dashboard } from './pages/app/dashboard/page';
 import { SignIn } from './pages/app/auth/sign-in';
 import { SignUp } from './pages/app/auth/sign-up';
 import { Home } from './pages/app/page';
+import { Beta } from './pages/app/beta';
 
 const routes = createBrowserRouter([
 	{
@@ -14,7 +15,7 @@ const routes = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Home />,
+				element: <Beta />,
 			},
 			{
 				path: '/dashboard',
