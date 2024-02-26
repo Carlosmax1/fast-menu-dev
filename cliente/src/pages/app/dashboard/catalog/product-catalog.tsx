@@ -17,12 +17,21 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Upload } from 'lucide-react';
+import { ChevronRight, Upload } from 'lucide-react';
 
 export function ProductCatalog() {
 	return (
 		<>
 			<h1 className="max-lg:text-4xl md:text-2xl font-bold text-zinc-800">Cadastre um produto</h1>
+			<div className='p-2 rounded-lg bg-zinc-50 border h-14 mt-10 flex items-center'>
+				<nav>
+					<div className='flex gap-2 items-center'>
+						<span className='text-zinc-800 font-medium'>Catalogo</span>
+						<ChevronRight size={15} />
+						<span className='text-zinc-800 font-medium'>Produtos</span>
+					</div>
+				</nav>
+			</div>
 			<form className="grid grid-cols-[2fr_1fr] gap-5">
 				<div className="mt-10 border shadow rounded-lg p-4">
 					<h2 className="text-zinc-400 text-primary-foreground uppercase">Produto</h2>
@@ -60,7 +69,7 @@ export function ProductCatalog() {
 				</div>
 				<section className="grid grid-rows-2">
 					<div className="mt-10 border shadow rounded-lg p-4 flex flex-col gap-5 h-fit">
-						<h2 className="text-zinc-300 text-primary-foreground uppercase">Publicar produto</h2>
+						<h2 className="text-zinc-400 text-primary-foreground uppercase">Publicar produto</h2>
 						<div className="grid gap-2">
 							<Label>Tipo de publicação: </Label>
 							<Select defaultValue="publicar">
